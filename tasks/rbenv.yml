@@ -1,0 +1,27 @@
+---
+- name: install rbenv
+  git:
+    repo: https://github.com/rbenv/rbenv
+    dest: "{{ ruby_user_home }}/.rbenv"
+    update: false
+  become: true
+  become_user: "{{ ruby_user }}"
+  become_flags: -Hi
+
+- name: install ruby-build
+  git:
+    repo: https://github.com/rbenv/ruby-build.git
+    dest: "{{ ruby_user_home }}/.rbenv/plugins/ruby-build"
+    update: false
+  become: true
+  become_user: "{{ ruby_user }}"
+  become_flags: -Hi
+
+- name: install profile script
+  template:
+    src: rbenv.sh.j2
+    dest: /etc/profile.d/rbenv.sh
+    owner: root
+    group: root
+    mode: "0755"
+  become: true

@@ -1,0 +1,8 @@
+---
+ruby_build_packages:
+  - bzip2
+  - gcc
+  - make
+  - libssl-dev
+  - zlib1g-dev
+  - libreadline6-dev

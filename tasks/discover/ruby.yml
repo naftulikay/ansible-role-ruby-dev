@@ -1,0 +1,52 @@
+---
+- name: get ruby user details
+  command: getent passwd {{ ruby_user }}
+  become: true
+  become_user: "{{ ruby_user }}"
+  changed_when: false
+  register: ruby_user_check
+
+- name: set ruby user home
+  set_fact:
+    ruby_user_home: "{{ ruby_user_check.stdout_lines[0].split(':')[5] }}"
+    ruby_user_shell: "{{ ruby_user_check.stdout_lines[0].split(':')[6] }}"
+
+- name: set rbenv facts
+  set_fact:
+    rbenv_executable: "{{ ruby_user_home }}/.pyenv/bin/rbenv"
+    rbenv_root: "{{ ruby_user_home }}/.rbenv"
+
+# detect whether pyenv is installed
+- name: detect pyenv installation status
+  command: ls "{{ ruby_user_home }}/.rbenv"
+  register: rbenv_check
+  changed_when: false
+  failed_when: false
+
+# detect the version of ruby installed
+- name: detect if ruby installed
+  command: ls "{{ ruby_user_home }}/.pyenv/versions/{{ ruby_version }}"
+  register: ruby_version_installed
+  become: true
+  become_user: "{{ ruby_user }}"
+  changed_when: false
+  failed_when: false
+
+- name: get ruby version
+  shell: "{{ rbenv_executable }} version"
+  register: ruby_version_check
+  become: true
+  become_user: "{{ ruby_user }}"
+  become_method: sudo
+  become_flags: -Hi
+  changed_when: false
+  failed_when: false
+
+- name: set facts
+  set_fact:
+    rbenv_installed: "{{ rbenv_check.rc == 0 | bool }}"
+    ruby_installed: "{{ ruby_version_installed.rc == 0 | bool }}"
+    ruby_detected_version: "{{ '' if ruby_version_check.rc > 0 else ruby_version_check.stdout.strip() }}"
+
+- name: detect whether correct version of ruby
+  set_fact: ruby_version_changed="{{ not ruby_detected_version.startswith(ruby_version) }}"

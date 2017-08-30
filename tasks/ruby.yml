@@ -1,0 +1,20 @@
+---
+- name: install ruby build dependencies
+  package: name={{ item }} state=present
+  with_items: "{{ ruby_build_packages }}"
+  become: true
+
+- name: install the given ruby version
+  command: "{{ rbenv_executable }} install {{ ruby_version }}"
+  become: true
+  become_user: "{{ ruby_user }}"
+  register: ruby_install_result
+  when: (not ruby_installed)
+
+- name: set the ruby version in pyenv
+  command: "{{ rbenv_executable }} local {{ ruby_version }}"
+  become: true
+  become_user: "{{ ruby_user }}"
+  become_method: sudo
+  become_flags: -Hi
+  when: ruby_version_changed or ruby_install_result|changed

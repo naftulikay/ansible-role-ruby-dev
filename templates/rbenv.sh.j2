@@ -1,0 +1,11 @@
+# add rbenv and friends to the path
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+# source bash completions
+test -e "$HOME/.rbenv/completions/rbenv.bash" && \
+  source "$HOME/.rbenv/completions/rbenv.bash"
+
+# initialize rbenv
+if which rbenv >/dev/null 2>&1 ; then
+  eval "$(rbenv init -)"
+fi
