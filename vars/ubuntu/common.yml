@@ -1,8 +1,17 @@
 ---
+# as recommended here: https://github.com/rbenv/ruby-build/wiki
 ruby_build_packages:
-  - bzip2
   - gcc
   - make
+  - autoconf
+  - bison
+  - build-essential
   - libssl-dev
-  - zlib1g-dev
+  - libyaml-dev
   - libreadline6-dev
+  - zlib1g-dev
+  - libncurses5-dev
+  - libffi-dev
+  - libgdbm3
+  - libgdbm-dev
+  - wget

@@ -1,8 +1,13 @@
 ---
+# as recommended here: https://github.com/rbenv/ruby-build/wiki
 ruby_build_packages:
-  - bzip2
   - gcc
   - make
+  - bzip2
   - openssl-devel
-  - zlib-devel
+  - libyaml-devel
+  - libffi-devel
   - readline-devel
+  - zlib-devel
+  - gdbm-devel
+  - ncurses-devel

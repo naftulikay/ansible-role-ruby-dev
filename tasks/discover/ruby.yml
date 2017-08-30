@@ -13,11 +13,11 @@
 
 - name: set rbenv facts
   set_fact:
-    rbenv_executable: "{{ ruby_user_home }}/.pyenv/bin/rbenv"
+    rbenv_executable: "{{ ruby_user_home }}/.rbenv/bin/rbenv"
     rbenv_root: "{{ ruby_user_home }}/.rbenv"
 
-# detect whether pyenv is installed
-- name: detect pyenv installation status
+# detect whether rbenv is installed
+- name: detect rbenv installation status
   command: ls "{{ ruby_user_home }}/.rbenv"
   register: rbenv_check
   changed_when: false
@@ -25,7 +25,7 @@
 
 # detect the version of ruby installed
 - name: detect if ruby installed
-  command: ls "{{ ruby_user_home }}/.pyenv/versions/{{ ruby_version }}"
+  command: ls "{{ ruby_user_home }}/.rbenv/versions/{{ ruby_version }}"
   register: ruby_version_installed
   become: true
   become_user: "{{ ruby_user }}"

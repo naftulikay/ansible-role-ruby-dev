@@ -2,6 +2,9 @@
 dist: trusty
 sudo: required
 
+language: python
+python: "3.5"
+
 matrix:
   fast_finish: true
 
@@ -17,7 +20,8 @@ env:
     - IMAGE_NAME: naftulikay/xenial-vm:latest
     - IMAGE_NAME: naftulikay/trusty-vm:latest
 
-script: make test-clean
+install: pip install -r requirements.txt
+script: travis-pls make test-clean
 
 notifications:
   email: { on_success: never, on_failure: never }

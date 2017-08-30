@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # vi: set ft=ruby :
 
+require 'etc'
 require 'shellwords'
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
@@ -18,6 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Tweak the VMs configuration.
   config.vm.provider "virtualbox" do |vb|
+    vb.cpus = Etc.nprocessors
     vb.memory = 1024
     vb.linked_clone = true
   end
