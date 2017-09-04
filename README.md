@@ -61,4 +61,4 @@ MIT
  [travis]: https://travis-ci.org/naftulikay/ansible-role-ruby-dev
  [travis.svg]: https://travis-ci.org/naftulikay/ansible-role-ruby-dev.svg?branch=master
  [galaxy]: https://galaxy.ansible.com/naftulikay/ruby-dev/
- [pyenv]: https://github.com/rbenv/rbenv
+ [rbenv]: https://github.com/rbenv/rbenv

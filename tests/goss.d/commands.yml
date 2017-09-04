@@ -1,7 +1,7 @@
 ---
 command:
-  # executing pyenv version should return the specified python version
-  'sudo -Hiu {{.Env.python_user}} {{ .Env.rbenv_executable }} version':
+  # executing rbenv version should return the specified python version
+  'sudo -Hiu {{.Env.ruby_user}} {{ .Env.rbenv_executable }} version':
     exit-status: 0
     stdout:
-      - "{{.Env.python_version}}"
+      - "{{.Env.ruby_version}}"
