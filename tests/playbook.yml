@@ -22,7 +22,7 @@
       degoss_debug: true
       degoss_clean: false
       goss_file: goss.yml
-      goss_addtl_dirs: [goss.d/]
+      goss_addtl_dirs: [goss.d]
       goss_env_vars:
         ruby_user: vagrant
         ruby_version: "2.4.1"

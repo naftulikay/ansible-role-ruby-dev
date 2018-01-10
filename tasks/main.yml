@@ -5,11 +5,11 @@
 
 # set facts to reliably determine os
 - name: discover operating system
-  include: discover/os.yml
+  include_tasks: discover/os.yml
 
 # set facts to reliably determine ruby variables
 - name: discover ruby
-  include: discover/ruby.yml
+  include_tasks: discover/ruby.yml
 
 # load per-os and per distro variables
 - name: load variables
@@ -32,8 +32,8 @@
 
 # install rbenv
 - name: install rbenv
-  include: rbenv.yml
+  include_tasks: rbenv.yml
 
 # install ruby
 - name: install ruby
-  include: ruby.yml
+  include_tasks: ruby.yml
