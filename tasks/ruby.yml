@@ -20,3 +20,18 @@
   become_method: sudo
   become_flags: -Hi
   when: ruby_version_changed or ruby_install_result|changed
+
+- name: set the ruby version on disk
+  copy:
+    content: "{{ ruby_version }}"
+    dest: "{{ ruby_user_home }}/{{ item }}"
+    owner: "{{ ruby_user }}"
+    group: "{{ ruby_user }}"
+    mode: "0644"
+  become: true
+  become_user: "{{ ruby_user }}"
+  become_method: sudo
+  become_flags: -Hi
+  with_items:
+    - .ruby-version
+    - .rbenv/version
