@@ -1,7 +1,13 @@
 ---
 command:
+  # executing rbenv version should return the specified ruby version
+  'sudo -Hiu vagrant ruby --version':
+    exit-status: 0
+    stdout:
+      - "{{.Env.ruby_version}}"
+
   # executing rbenv version should return the specified python version
-  'sudo -Hiu {{.Env.ruby_user}} {{ .Env.rbenv_executable }} version':
+  'sudo -Hiu {{.Env.ruby_user}} rbenv version':
     exit-status: 0
     stdout:
       - "{{.Env.ruby_version}}"
