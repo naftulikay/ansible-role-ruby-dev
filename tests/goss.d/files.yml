@@ -11,3 +11,14 @@ file:
       - /\$\(rbenv init \-\)/
   '/home/{{.Env.ruby_user}}/.rbenv':
     exists: true
+
+  # rbenv seems to get confused unless we manually kang these files
+  '/home/{{.Env.ruby_user}}/.rbenv/version':
+    exists: true
+    contains:
+      - "{{.Env.ruby_version}}"
+
+  '/home/{{.Env.ruby_user}}/.ruby-version':
+    exists: true
+    contains:
+      - "{{.Env.ruby_version}}"
