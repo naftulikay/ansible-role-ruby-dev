@@ -17,8 +17,3 @@ file:
     exists: true
     contains:
       - "{{.Env.ruby_version}}"
-
-  '/home/{{.Env.ruby_user}}/.ruby-version':
-    exists: true
-    contains:
-      - "{{.Env.ruby_version}}"
